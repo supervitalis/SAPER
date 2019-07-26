@@ -1,0 +1,73 @@
+
+import pygame #dostarcza oprawę graficzną
+import time #do funkcji sleep
+
+## PyGame
+pygame.init()
+## Attributs de l'écran menu
+Width = 600
+Height = 600
+red = (255,0,0)
+green = (0,255,0)
+blue = (0,0,255)
+darkBlue = (0,0,128)
+white = (255,255,255)
+black = (0,0,0)
+pink = (255,200,200)
+## Ecran menu
+temps = pygame.time.Clock()
+
+def text_objects(text, font):
+    textSurface = font.render(text, True, white)
+    return textSurface, textSurface.get_rect()
+
+def game_intro():
+
+    intro = True
+    
+    
+
+    while intro:
+        for event in pygame.event.get():
+            print(event)
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+        screen = pygame.display.set_mode((Width, Height))        
+        largeText = pygame.font.Font('freesansbold.ttf',115)
+        BoutonText = pygame.font.Font('freesansbold.ttf',26)
+        TextSurf, TextRect = text_objects("Saper", largeText)
+        TextRect.center = ((Width/2),(Height/4+50))
+        screen.blit(TextSurf, TextRect)
+        facile_bouton = pygame.draw.rect(screen,(0,0,240),(Width/4-50,Height/2,100,50))
+        TextSurf, TextRect = text_objects("Facile", BoutonText)
+        TextRect.center = (Width/4,Height/2+25)
+        screen.blit(TextSurf, TextRect)
+        moyen_bouton = pygame.draw.rect(screen,(0,244,0),(Width/2-50,Height/2,100,50))
+        TextSurf, TextRect = text_objects("Moyen", BoutonText)
+        TextRect.center = (Width/2,Height/2+25)
+        screen.blit(TextSurf, TextRect)
+        difficile_bouton = pygame.draw.rect(screen,(244,0,0),(Width/2+Width/4-50,Height/2,100,50))
+        TextSurf, TextRect = text_objects("Difficile", BoutonText)
+        TextRect.center = (Width/4+Width/2,Height/2+25)
+        screen.blit(TextSurf, TextRect)
+        quit_bouton = pygame.draw.rect(screen,(244,0,0),(Width/2+25,Height/2+Height/4,100,50))
+        TextSurf, TextRect = text_objects("Quitter", BoutonText)
+        TextRect.center = (Width/2+75,Height/2+Height/4 +25)
+        screen.blit(TextSurf, TextRect)
+        custom_bouton = pygame.draw.rect(screen,(0,244,0),(Width/4+25,Height/2+Height/4,100,50))
+        TextSurf, TextRect = text_objects("Custom", BoutonText)
+        TextRect.center = (Width/4+75,Height/2+Height/4 +25)
+        screen.blit(TextSurf, TextRect)
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if pygame.mouse.get_pos()[0] >= Width/4-50 and pygame.mouse.get_pos()[1] >= Height/2:
+                    if pygame.mouse.get_pos()[0] <= Width/4 + 50 and pygame.mouse.get_pos()[1] <= Height/2 + 50:
+                            facile();
+                if pygame.mouse.get_pos()[0] >= Width/2-50 and pygame.mouse.get_pos()[1] >= Height/2:
+                    if pygame.mouse.get_pos()[0] <= Width/2+50 and pygame.mouse.get_pos()[1] <= Height/2 + 50:
+                            moyen();
+        pygame.display.update()
+        temps.tick(30)
+   
+   
